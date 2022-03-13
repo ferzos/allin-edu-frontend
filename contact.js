@@ -9,6 +9,32 @@ checkbox.addEventListener('click', function() {
   }
 })
 
-submitButton.addEventListener('click', function() {
+function confirmMessage() {
   alert('Thank you for submitting!')
-})
+}
+
+function alertMessage() {
+  alert('Please fill all the form with valid input')
+}
+
+function submitForm() {
+  var inputElements = document.getElementsByTagName('input')
+
+  var allRequiredAreFilled = true
+  for (let index = 0; index < inputElements.length; index++) {
+    const element = inputElements[index];
+    
+    if (element.hasAttribute('required') && (!element.value || !element.checkValidity())) {
+      allRequiredAreFilled = false
+      break
+    } 
+  }
+  
+  if (allRequiredAreFilled) {
+    confirmMessage()
+  } else {
+    alertMessage()
+  }
+}
+
+submitButton.addEventListener('click', submitForm)
